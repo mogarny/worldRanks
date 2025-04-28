@@ -1,0 +1,99 @@
+<div class="content">
+  <div class="header">
+    <span class="found">Found {{ this.totalCount }} countries</span>
+    <p-inputgroup>
+      <p-inputgroup-addon class="border-none">
+        <img src="country-page-master/resources/Search.svg" alt="" />
+      </p-inputgroup-addon>
+      <input
+        class="input border-none"
+        (keydown)="search($event)"
+        [(ngModel)]="searchBy"
+        placeholder="Search by Name, Region, Subregion"
+      />
+    </p-inputgroup>
+  </div>
+
+  <div class="main">
+    <div class="filters">
+      <h5>Sort by</h5>
+      <p-select
+        (onChange)="onOptionChange()"
+        [options]="filteredItems"
+        [(ngModel)]="sortBy"
+        placeholder="Population"
+        class="w-full md:w-56"
+      />
+
+      <h5>Region</h5>
+      <div class="regions">
+        <span (click)="fetchByRegion('Americas')">Americas</span>
+        <span (click)="fetchByRegion('Antarctic')">Antarctic</span>
+        <span (click)="fetchByRegion('Africa')">Africa</span>
+        <span (click)="fetchByRegion('Asia')">Asia</span>
+        <span (click)="fetchByRegion('Europe')">Europe</span>
+      </div>
+    </div>
+
+    <p-table
+      [paginator]="true"
+      [ngStyle]="{ 'background-color': 'transparent' }"
+      [rows]="7"
+      [(first)]="first"
+      [value]="this.state.currentState.loading ? loadingData : countries"
+      (onPage)="onPageChange($event)"
+    >
+      <ng-template #header>
+        <tr>
+          <th>Flag</th>
+          <th>Name</th>
+          <th>Population</th>
+          <th>Area (km²)</th>
+          <th>Region</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-country>
+        <tr [routerLink]="['/country-details', country.ccn3]">
+          <td class="border-none">
+            <p-skeleton
+              shape="square"
+              height="50px"
+              width="75px"
+              *ngIf="this.state.currentState.loading"
+            />
+            <img
+              *ngIf="!this.state.currentState.loading"
+              style="width: 75px"
+              src="{{ country.flags.svg }}"
+              alt=""
+            />
+          </td>
+          <td class="border-none">
+            <p-skeleton *ngIf="this.state.currentState.loading" />
+            <span *ngIf="!this.state.currentState.loading">{{
+              country.name.common
+            }}</span>
+          </td>
+          <td class="border-none">
+            <p-skeleton *ngIf="this.state.currentState.loading" />
+            <span *ngIf="!this.state.currentState.loading">{{
+              country.population
+            }}</span>
+          </td>
+          <td class="border-none">
+            <p-skeleton *ngIf="this.state.currentState.loading" />
+            <span *ngIf="!this.state.currentState.loading">{{
+              country.area
+            }}</span>
+          </td>
+          <td class="border-none">
+            <p-skeleton *ngIf="this.state.currentState.loading" />
+            <span *ngIf="!this.state.currentState.loading">{{
+              country.region
+            }}</span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

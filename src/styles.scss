@@ -1,1 +1,178 @@
-/* You can add global styles to this file, and also import other style files */
+$primary-color: #1b1d1f;
+$secondary-color: #282b30;
+$text-color: #d2d5da;
+
+body {
+  background-color: $primary-color !important;
+  margin: 0 !important;
+  color: $text-color;
+}
+
+p-select {
+  background-color: $primary-color !important;
+  width: 417px;
+  height: 61px;
+  border: 2px solid $secondary-color !important;
+  align-items: center;
+  color: $text-color;
+
+  span {
+    color: $text-color !important;
+  }
+
+  .p-select-list-container {
+    background-color: $secondary-color;
+    color: $text-color;
+  }
+}
+
+.p-select-option.p-select-option-selected,
+.p-focus {
+  background-color: $primary-color !important;
+}
+
+.position-center {
+  position: absolute;
+  top: 181px;
+  right: 43%;
+  height: 36px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-color;
+  position: absolute;
+  top: 356px;
+  right: 2%;
+  width: 96%;
+  padding: 35px 40px 0 40px;
+  border-radius: 15px;
+  border: solid 1px $secondary-color;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+
+  span {
+    display: block;
+    font-size: 26px;
+    letter-spacing: 1px;
+    width: fit-content;
+    color: $text-color;
+  }
+
+  p-inputgroup {
+    width: 417px;
+    background-color: $secondary-color;
+    border-radius: 13px;
+    height: 61px;
+
+    p-inputgroup-addon {
+      border-radius: 13px;
+      background-color: transparent;
+    }
+
+    img {
+      height: 35px;
+      padding: 0px 0 0 7px;
+    }
+
+    input {
+      padding: 4px 0 0 8px !important;
+    }
+
+    input::placeholder {
+      font-size: 20px;
+    }
+
+    input:focus {
+      color: $text-color;
+      outline: none;
+    }
+  }
+
+  .found {
+    display: block;
+  }
+
+  .input {
+    background-color: transparent;
+    width: 100%;
+  }
+}
+
+.main {
+  display: flex;
+  margin-top: 30px;
+
+  .filters {
+    display: flex;
+    flex-direction: column;
+
+    h5 {
+      font-size: 22px;
+      color: $text-color;
+    }
+
+    .regions {
+      span {
+        padding: 10px 15px;
+        background-color: $secondary-color;
+        margin: 5px;
+        border-radius: 10px;
+      }
+
+      span:hover {
+        background-color: #282b3094;
+      }
+    }
+  }
+
+  p-table {
+    width: 100%;
+    color: $text-color;
+
+    th,
+    tr {
+      background-color: transparent;
+      color: $text-color !important;
+    }
+
+    td {
+      cursor: pointer;
+    }
+  }
+
+  table {
+    background-color: transparent !important;
+
+    thead th {
+      border-bottom: 2px solid $secondary-color;
+    }
+  }
+}
+
+.border-none {
+  border: none !important;
+}
+
+.main p-table th,
+.main p-table tr {
+  background-color: transparent !important;
+}
+
+.p-paginator {
+  background-color: transparent !important;
+}
+
+.p-paginator-page-selected {
+  background-color: $secondary-color !important;
+}
+
+.p-paginator-page:hover {
+  background-color: $secondary-color !important;
+}

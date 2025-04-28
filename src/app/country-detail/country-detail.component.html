@@ -1,0 +1,47 @@
+<div class="country-details-container">
+  <div class="country-details" *ngIf="country">
+    <img [src]="country.flags.svg" alt="" />
+    <h1>{{ country.name.common }}</h1>
+    <h3>{{ country.name.official }}</h3>
+
+    <div class="population-area">
+      <div class="box">
+        <span>Population</span>
+        <div class="divider" layout="vertical"></div>
+        <span>{{ country.population | number }}</span>
+      </div>
+
+      <div class="box">
+        <span>Area (km2)</span>
+        <div class="divider" layout="vertical"></div>
+        <span>{{ country.area | number }}</span>
+      </div>
+    </div>
+
+    <div class="details">
+      <div>
+        <span>Capital</span>
+        <span>{{ country.capital }}</span>
+      </div>
+      <div>
+        <span>Subregion</span>
+        <span>{{ country.subregion }}</span>
+      </div>
+      <div>
+        <span>Language</span>
+        <span>{{ country.languages | objectValues }}</span>
+      </div>
+      <div>
+        <span>Currencies</span>
+        <span>{{ country.currencies | objectValues }}</span>
+      </div>
+      <div>
+        <span>Continents</span>
+        <span>{{ country.continents | join }}</span>
+      </div>
+    </div>
+    <div class="neighboring">
+      <div></div>
+    </div>
+  </div>
+</div>
