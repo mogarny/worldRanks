@@ -83,12 +83,20 @@ export class CountriesMainComponent implements OnInit {
     });
   }
 
-  search(e: KeyboardEvent, searchedWord?: string) {
+  search(e: KeyboardEvent) {
+    console.log(this.searchBy);
+    this.state.update({ searchedWord: this.searchBy });
+
     if (e.key === 'Enter') {
       this.state.update({ loading: true });
       this.api.getCountries().subscribe({
         next: (data) => {
-          this.state.update({ page: this.currentPage, loading: false });
+          this.state.update({
+            page: this.currentPage,
+            loading: false,
+          });
+          console.log(this.state.currentState);
+
           this.countries = data;
           this.totalCount = this.countries.length;
           console.log('Fetched Data:', this.countries);

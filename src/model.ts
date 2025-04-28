@@ -78,11 +78,3 @@ export interface Store {
   searchedWord?: string;
   loading?: boolean;
 }
-
-export interface Joined {
-  name: Object | null;
-  region: Object | null;
-  subregion: Object | null;
-  code: Object | null;
-  lang: Object | null;
-}
