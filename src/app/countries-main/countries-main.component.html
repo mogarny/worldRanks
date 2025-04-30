@@ -42,6 +42,7 @@
       [(first)]="first"
       [value]="this.state.currentState.loading ? loadingData : countries"
       (onPage)="onPageChange($event)"
+      *ngIf="!this.error; else serverDown"
     >
       <ng-template #header>
         <tr>
@@ -95,5 +96,18 @@
         </tr>
       </ng-template>
     </p-table>
+
+    <ng-template #serverDown>
+      <div class="error-container">
+        <div class="error-icon">🔌</div>
+        <h1>Server Currently Unavailable</h1>
+        <p>
+          {{ this.error }}
+        </p>
+        <button class="refresh-button" onclick="window.location.reload()">
+          Refresh Page
+        </button>
+      </div>
+    </ng-template>
   </div>
 </div>

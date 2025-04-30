@@ -78,3 +78,5 @@ export interface Store {
   searchedWord?: string;
   loading?: boolean;
 }
+
+export type PossibleError<T> = T | 'error';

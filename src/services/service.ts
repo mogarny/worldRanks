@@ -9,9 +9,8 @@ import {
   of,
   switchMap,
 } from 'rxjs';
-import { Country } from '../model';
+import { Country, PossibleError } from '../model';
 import { SharedModuleService } from './shared-module.service';
-import { Ripple } from 'primeng/ripple';
 
 @Injectable({
   providedIn: 'root',
@@ -28,18 +27,22 @@ export class DataService {
     return `${this.baseUrl}/${option}/${searchWord}`;
   }
 
-  getCountries(): Observable<Country[]> {
+  getCountries(): Observable<Country[] | string> {
     const state = this.state.currentState;
     console.log(state);
 
     if (state.filter) {
-      console.log('filter');
       return this.http
         .get<Country[]>(this.urlGenerator('region', state.filter))
         .pipe(
           map((data) => {
             return this.sortByOption(data, state.sort ?? 'population');
           }),
+          catchError(() =>
+            of(
+              "We're sorry, but the server is not working right now. Please try again later.",
+            ),
+          ),
         );
     } else if (state.searchedWord) {
       return this.search(state.searchedWord).pipe(
@@ -51,6 +54,11 @@ export class DataService {
             state.sort ?? 'population',
           );
         }),
+        catchError(() =>
+          of(
+            "We're sorry, but the server is not working right now. Please try again later.",
+          ),
+        ),
       );
     } else {
       return this.http.get<Country[]>(`${this.baseUrl}/all`).pipe(
@@ -60,6 +68,11 @@ export class DataService {
             state.sort ?? 'population',
           );
         }),
+        catchError(() =>
+          of(
+            "We're sorry, but the server is not working right now. Please try again later.",
+          ),
+        ),
       );
     }
   }
@@ -104,13 +117,6 @@ export class DataService {
     console.log(joined);
 
     return joined;
-    // of(
-    //   this.removeDuplicates(
-    //     Object.values(joined)
-    //       .filter((el) => Array.isArray(el))
-    //       .flat(),
-    //   ),
-    // );
   }
 
   private removeDuplicates(countries: (Country | null)[]): Country[] {

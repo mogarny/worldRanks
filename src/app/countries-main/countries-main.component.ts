@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModuleService } from '../../services/shared-module.service';
 import { PaginatorModule } from 'primeng/paginator';
 import { SkeletonModule } from 'primeng/skeleton';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-countries-main',
@@ -46,6 +47,7 @@ export class CountriesMainComponent implements OnInit {
   currentPage: number = 0;
   countriesPerPage: number = 7;
   loadingData = Array(this.countriesPerPage).fill({});
+  error: string | null = null;
 
   constructor(
     private api: DataService,
@@ -75,8 +77,13 @@ export class CountriesMainComponent implements OnInit {
           this.state.update({ loading: false });
           console.log(this.state.currentState);
 
-          this.countries = data;
-          this.totalCount = this.countries.length;
+          if (typeof data === 'string') {
+            this.state.update({ loading: false });
+            this.error = data;
+          } else {
+            this.countries = data;
+            this.totalCount = this.countries.length;
+          }
           console.log(this.countries);
         }
       },
@@ -97,8 +104,13 @@ export class CountriesMainComponent implements OnInit {
           });
           console.log(this.state.currentState);
 
-          this.countries = data;
-          this.totalCount = this.countries.length;
+          if (typeof data === 'string') {
+            this.state.update({ loading: false });
+            this.error = data;
+          } else {
+            this.countries = data;
+            this.totalCount = this.countries.length;
+          }
           console.log('Fetched Data:', this.countries);
         },
         error: (err) => {
@@ -111,10 +123,13 @@ export class CountriesMainComponent implements OnInit {
   onOptionChange() {
     this.state.update({ sort: this.sortBy, loading: true });
     this.api.getCountries().subscribe((response) => {
-      if (response !== null) {
+      if (typeof response !== 'string') {
         this.state.update({ loading: false });
         this.countries = response;
         this.first = 0;
+      } else {
+        this.state.update({ loading: false });
+        this.error = response;
       }
     });
   }
@@ -132,9 +147,14 @@ export class CountriesMainComponent implements OnInit {
     });
 
     this.api.getCountries().subscribe((data) => {
-      this.state.update({ loading: false });
-      this.countries = data;
-      this.totalCount = this.countries.length;
+      if (typeof data === 'string') {
+        this.state.update({ loading: false });
+        this.error = data;
+      } else {
+        this.state.update({ loading: false });
+        this.countries = data;
+        this.totalCount = this.countries.length;
+      }
     });
   }
 }
