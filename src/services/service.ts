@@ -9,7 +9,7 @@ import {
   of,
   switchMap,
 } from 'rxjs';
-import { Country, Joined } from '../model';
+import { Country } from '../model';
 import { SharedModuleService } from './shared-module.service';
 import { Ripple } from 'primeng/ripple';
 
