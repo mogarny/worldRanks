@@ -316,3 +316,30 @@ p-select {
     }
   }
 }
+
+@media (min-width: 300px) and (max-width: 600px) {
+  .country-details-container .country-details {
+    img {
+      width: 210px;
+    }
+
+    .population-area .box {
+      padding: 0px 10px !important;
+      border-radius: 10px;
+
+      span {
+        font-size: 12px;
+      }
+    }
+
+    .details {
+      div {
+        height: 80px;
+
+        span {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
