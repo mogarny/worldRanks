@@ -46,9 +46,15 @@ p-select {
   top: 356px;
   right: 2%;
   width: 96%;
-  padding: 35px 40px 0 40px;
+  padding: 20px 10px 20px 10px;
   border-radius: 15px;
   border: solid 1px $secondary-color;
+
+  .main table {
+    tbody tr td img {
+      width: 75px;
+    }
+  }
 }
 
 .header {
@@ -119,6 +125,10 @@ p-select {
     }
 
     .regions {
+      flex-wrap: wrap;
+      display: flex;
+      justify-content: center;
+
       span {
         padding: 10px 15px;
         background-color: $secondary-color;
@@ -175,4 +185,134 @@ p-select {
 
 .p-paginator-page:hover {
   background-color: $secondary-color !important;
+}
+
+@media (min-width: 800px) and (max-width: 1070px) {
+  .position-center {
+    position: absolute;
+    top: 150px;
+    right: 38%;
+    height: 36px;
+  }
+
+  p-select {
+    width: 260px;
+    height: 35px;
+  }
+
+  .content {
+    position: static;
+    margin: 20px auto;
+    padding: 35px 20px 0 20px;
+
+    .main table {
+      tbody tr td img {
+        width: 50px;
+      }
+    }
+  }
+
+  .header {
+    p-inputgroup {
+      width: 200px;
+      background-color: $secondary-color;
+      border-radius: 8px;
+      height: 30px;
+
+      input {
+        padding: 0 !important;
+      }
+    }
+
+    .p-inputgroupaddon {
+      padding: 0;
+
+      img {
+        width: 25px;
+        padding: 0;
+      }
+    }
+
+    p-inputgroup input::placeholder {
+      font-size: 9px;
+    }
+  }
+}
+
+@media (min-width: 300px) and (max-width: 800px) {
+  .position-center {
+    position: absolute;
+    top: 20px;
+    height: 36px;
+    left: 0;
+    right: auto;
+    width: 160px;
+  }
+
+  p-select {
+    width: 240px;
+    height: 35px;
+  }
+
+  .content {
+    position: static;
+    margin: 15px auto;
+    padding: 20px 10px 0 10px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+
+    span {
+      font-size: 10px;
+      margin-bottom: 12px;
+    }
+
+    p-inputgroup {
+      width: 200px;
+      background-color: $secondary-color;
+      border-radius: 8px;
+      height: 30px;
+
+      input {
+        padding: 0 !important;
+      }
+    }
+
+    .p-inputgroupaddon {
+      padding: 0;
+
+      img {
+        width: 25px;
+        padding: 0;
+      }
+    }
+
+    p-inputgroup input::placeholder {
+      font-size: 9px;
+    }
+  }
+
+  .main {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    table thead th {
+      padding: 15px 0px;
+    }
+
+    .filters {
+      flex-direction: column;
+      align-items: center;
+      width: fit-content;
+      margin: 0 auto;
+
+      h5 {
+        font-size: 15px;
+      }
+    }
+  }
 }
